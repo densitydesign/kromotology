@@ -1,0 +1,138 @@
+<header>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><h2>{{prjName}}</h2></a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-show="false"><a href="#/about">About</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+</header>
+
+<div class="app-header container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>{{prjName}}</h1>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-xs-9">
+        <p><b>{{prjName}}</b> is a tool for performing the automatic extraction and the labeling of dominant colours in raster images.</p>
+        <p>It analyses the images running a <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">k-means</a> algorithm and looking for pixels groups with a similar tint and then it returns names and percentages of discovered colours, both in visual form and data.</p>
+      </div>
+      <div class="col-xs-9 examples">
+        <img src="./images/example-img.jpg"/>
+          <i class="fa fa-arrow-circle-right" data-toggle="tooltip" data-placement="top" title="Get 5 cluster" tooltip-placement="top" tooltip="Process 5 clusters."></i>
+        <img src="./images/example-flag.png"/>
+      </div>
+      <div class="col-xs-9">
+        <p>The amount of colours to be discovered is set to <b>5</b> by default.</p>
+        <p>It could be changed if you need more or less, take a look at our repository on <a ng-href="{{prjRepo}}" target="_blank">GitHub <i class="fa fa-github fa-1x"></i></a>.</p>
+        <p class="bold">URLs that do not correspond to raster images (not ending in jpeg, jpg, gif, png) will trigger an error.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-box">
+        <h4 class="">Paste here the list of image's URLs or <a ng-click="addRandomUrl()">try with a sample</a><i ng-click="urlList=''" class="fa fa-trash icon-action"></i></h4>
+        <textarea id="imgUrl" placeholder="One URL each line" ng-model="urlList" ng-model-options="{ debounce: 200 }" required></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" ng-show="showElements.go==true">
+    <div class="input-box col-xs-12">
+      <button type="submit" class="btn btn-default go" ng-click="fetchColors()">Go!</button>
+    </div>
+  </div> 
+</section>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12" ng-show="parsedImages.length > 0">
+      <h4>Results: {{ parsedImages.length }} / {{ listToParse.length }} parsed, <span><span style="color:#9FCA70"> {{parsedImages.length - errors}} Succesful</span> and <span style="color:#FA5E47">{{errors}} Failed.</span></span><i class="fa fa-refresh icon-action" aria-hidden="true" ng-click="fetchColors()"></i></h4>
+    </div>
+  </div>
+
+  <div class="row">
+      <div class="col-xs-12" ng-show="parsedImages.length > 0">
+        <div class=" progress">
+          <div class="progress-bar progress-bar-success" role="progressbar progress-bar-success" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':(100*(parsedImages.length - errors) / listToParse.length)+'%'}">
+            <span class="">{{ 100*(parsedImages.length - errors) / listToParse.length | currency:'' }}%</span>
+          </div>
+          <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':(100*errors / listToParse.length)+'%'}">
+            <span class="">{{ 100*errors / listToParse.length | currency:'' }}%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="row flag-container">
+    <div class="color-cont" ng-repeat="image in parsedImages">
+      <div ng-if="image.parsed == true" class="img-container"><img class="" ng-src="{{image.url}}"/></div>
+      <a ng-if="image.parsed == true"  class="colour-flag" ng-href="{{image.url}}" target="_blank">
+        <div class="color" ng-repeat="color in image.clusters" ng-style="{'background-color':'rgb('+color.rgb[0]+','+color.rgb[1]+','+color.rgb[2]+')','width':color.perc+'%'}"></div>
+      </a>
+      <div ng-if="image.parsed == false" class="img-container"><img class="" ng-src="{{image.url}}"/></div>
+      <a ng-if="image.parsed == false"  class="colour-flag" ng-href="{{image.url}}" target="_blank">
+        
+      <div class="color error" style=""><i class="fa fa-exclamation fa-4x" aria-hidden="true"></i></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="row" ng-show="showElements.svg == true">
+    <div id="svg-container" class="col-xs-12">
+      <svg id="chart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="chart"></svg>
+    </div>
+  </div>
+  <div class="row" ng-show="showElements.download == true">
+    <div class="input-box col-xs-6">
+      <button type="submit" class="btn btn-default" ng-click="getSVG()">Download SVG</button>
+    </div>
+    <div class="input-box col-xs-6">
+      <button type="submit" class="btn btn-default" ng-click="getTSV()">Download TSV</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="container-fluid">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-6">
+            <h4>About the Project</h4>
+            <p>This tool is part of <a href="">Strumentalia</a>, a collection of tools useful for doing weird stuff with the Web.</p>
+          </div>
+
+          <div class="col-md-4 col-sm-4 col-xs-6">
+            <h4>Credits</h4>
+            <p>A project by <a href="http://www.densitydesign.org" target="_blank">DensityDesign</a>.<br/>Source code available on<br class="visible-sm" /> <a ng-href="{{prjRepo}}" target="_blank">GitHub <i class="fa fa-github fa-1x"></i></a>.</p>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-6">
+            <a ng-show="false" href="http://www.dipartimentodesign.polimi.it/"><img class="img-responsive" src="./images/dip_logo.png"></a>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-6">
+            <a href="http://www.densitydesign.org/"><img class="img-responsive" src="./images/density_logo.png"></a>
+          </div>
+          
+      </div>
+  </div>
+</footer>
+

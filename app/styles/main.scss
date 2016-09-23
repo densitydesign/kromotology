@@ -1,0 +1,275 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "font-awesome/scss/font-awesome.scss";
+// endbower
+
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import "./font-awesome/scss/font-awesome.scss";
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Paytone+One';
+
+body {
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #4a4a4a;
+}
+
+/*FROM HERE*/
+
+a {
+  color: #FA5E47;
+  font-weight: 600;
+}
+
+a:hover {
+  opacity: 1;
+  color: #FB8675;
+  text-decoration: underline;
+}
+
+header {
+      background-color: #4a4a4a;
+    }
+.navbar-inverse {
+    background-color: #4a4a4a;
+    border-color: #333;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #fff;
+  text-transform: uppercase;
+  margin: auto;
+}
+.nav a {
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+a>i {
+  font-size:16px;
+}
+
+h1 {
+ font-family: 'Paytone One', sans-serif;
+ font-size: 48px;
+ letter-spacing: 3px;
+ color: #FA5E47;
+ text-transform: uppercase;
+ margin-bottom: 30px;
+}
+
+h4 {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+  font-weight: 700;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.right h4 {
+  padding-left: 0px;
+  padding-right: 10px;
+}
+
+.app-header {
+  background-color: #E4E9EB;
+  padding: 90px 0px 60px;
+}
+
+section {
+  padding-top: 30px;
+}
+
+input, textarea {
+  font-family: 'Cutive Mono', monospace;
+  font-size: 14px;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.examples {
+  margin: 20px 0;
+}
+
+.examples i {
+  margin: 20px;
+}
+
+.examples img {
+  height: 100px;
+  width: auto;
+  border-radius: 2px;
+}
+
+.input-box {
+  margin-bottom: 30px;
+}
+
+.input-box h4 {
+
+}
+
+input-box input, .input-box textarea, .input-box button, .resizeBox {
+  height: 60px;
+  border-radius: 5px;
+  border: 1px solid #979797;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+.input-box button.btn {
+  background-color: #E4E9EB;
+  border:none;
+  border-bottom: 4px solid #C5D6D9;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.input-box button.btn:hover {
+  border-bottom: #E4E9EB;
+}
+
+.input-box button.btn:active {
+  background-color: #E4E9EB;
+  border: none;
+}
+
+.input-box button.btn.btn-danger {
+  background-color: #FA5E47;
+  border-bottom: 4px solid #C54E3C;
+}
+
+.input-box button.btn.btn-danger:hover {
+  border-bottom: 4px solid #FA5E47;
+}
+
+.resizeBox {
+  padding: 0 0 0px 8px;
+  display: flex;
+  align-items: center;
+  font-family: 'Cutive Mono', monospace;
+  font-size: 14px;
+}
+
+.checkbox input {
+  height: auto;
+}
+
+.input-box textarea {
+  height: 200px;
+}
+
+.input-box i.fa {
+  font-size: 16px;
+}
+
+.icon-action {
+  float: right;
+  cursor: pointer;
+  color: #4a4a4a;
+  margin-left: 10px;
+}
+
+.flag-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.color-cont {
+  height: 100px;
+  display: inline-block;
+  border: none;
+  margin: 10px 15px 30px;
+  border-radius: 2px;
+  box-shadow: 0px 2px 4px rgba(0,0,0,.2);
+  overflow: hidden;
+  width:100px;
+  transition: box-shadow 0.3s ease;
+}
+
+.color-cont:hover {
+  box-shadow: none;
+}
+
+.color-cont > .img-container {
+  width: 100px;
+  height: 100px;
+  display: block;
+  background-color: #d4d4d4;
+}
+
+.color-cont > .img-container > img {
+  max-width:100%;
+  max-height:100%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.color-cont .colour-flag {
+  border-radius: 2px;
+  overflow: hidden;;
+  position: relative;
+  top: -100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  width: 101%;
+  height: 100%;
+  display: block;
+}
+
+.color-cont:hover .colour-flag {
+  opacity: 0;
+}
+
+.color-cont .colour-flag .color {
+  height:100%;
+  display: block;
+  float:left;
+}
+
+.color-cont .colour-flag .color.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  background-color: #FA5E47;
+  color: white;
+}
+
+.progress {
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.1)
+}
+
+.progress-bar.progress-bar-success {
+  background-color: #9FCA70;
+}
+
+.progress-bar.progress-bar-danger {
+  background-color: #FA5E47;
+}
+
+footer {
+  background-color: #4a4a4a;
+  color: white;
+  padding: 30px 0 60px;
+  border-top: 1px solid #a4a4a4;
+}
+h4 {
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0px;
+  margin-bottom: 20px;
+}
