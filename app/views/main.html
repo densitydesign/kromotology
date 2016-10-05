@@ -66,7 +66,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12" ng-show="parsedImages.length > 0">
-      <h4>Results: {{ parsedImages.length }} / {{ listToParse.length }} parsed, <span><span style="color:#9FCA70"> {{parsedImages.length - errors}} Succesful</span> and <span style="color:#FA5E47">{{errors}} Failed.</span></span><i class="fa fa-refresh icon-action" aria-hidden="true" ng-click="fetchColors()"></i></h4>
+      <h4>Results: {{ parsedImages.length }} / {{ listToParse.length }} parsed, <span><span style="color:#9FCA70"> {{parsedImages.length - errors}} Succesful</span> and <span style="color:#FA5E47">{{errors}} Failed.</span></span><i class="fa fa-refresh icon-action" aria-hidden="true" ng-click="retryErrors()" ng-show="showElements.retry == true"></i></h4>
     </div>
   </div>
 
