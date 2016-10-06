@@ -14,8 +14,10 @@ angular.module('kromotologyApp')
       'AngularJS',
       'Karma'
     ];
-    $scope.prjName='Kromotology 0.1'
+    $scope.prjName='Kromotology'
     $scope.prjRepo='https://github.com/densitydesign/strumentalia-kromotology'
+    $scope.backendAddress='http://131.175.56.235:8080'
+    // $scope.backendAddress='http://localhost:8080'
 
     //Object used for displaying or hiding elements based on boolean values
     $scope.showElements = {
@@ -57,7 +59,7 @@ angular.module('kromotologyApp')
 			var url = imageAddress
 			var i = position
 
-			var callString = "http://131.175.56.235:8080/single?img="+imageAddress+"&k=5"
+			var callString = $scope.backendAddress+"/single?img="+imageAddress+"&k=5"
 
 			$http.get(callString)
 				.then(function(response){
@@ -111,7 +113,7 @@ angular.module('kromotologyApp')
 				var url = $scope.parsedImages[position].url
 				var i = position
 
-				var callString = "http://131.175.56.235:8080/single?img="+url+"&k=5"
+				var callString = $scope.backendAddress+":/single?img="+url+"&k=5"
 				$http.get(callString)
 					.then(function(response){
 						
