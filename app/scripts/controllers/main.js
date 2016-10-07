@@ -113,7 +113,7 @@ angular.module('kromotologyApp')
 				var url = $scope.parsedImages[position].url
 				var i = position
 
-				var callString = $scope.backendAddress+":/single?img="+url+"&k=5"
+				var callString = $scope.backendAddress+"/single?img="+url+"&k=5"
 				$http.get(callString)
 					.then(function(response){
 						
